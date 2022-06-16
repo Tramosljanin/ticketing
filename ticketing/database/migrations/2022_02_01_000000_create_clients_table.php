@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable()->unique();
             $table->string('phone')->nullable()->unique();
-            //$table->('ticket');  podatci o ticketima
+            $table->foreignId('ticket_id')->constrained();
             $table->timestamps();
         });
     }
