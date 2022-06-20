@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,20 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\TicketController::class, 'index']
+)->middleware(['auth'])->name('dashboard');
 
-Route::get('/tickets', function () {
-    return view('tickets');
-})->middleware(['dashboard'])->name('tickets');
+Route::get('/all_tickets', [\App\Http\Controllers\TicketController::class, 'show_all']
+)->middleware(['auth'])->name('all_tickets');
 
 Route::get('/new_ticket', function () {
     return view('new_ticket');
-})->middleware(['dashboard'])->name('new_ticket');
+})->middleware(['auth'])->name('new_ticket');
 
-Route::get('/clients', function () {
-    return view('clients');
-})->middleware(['dashboard'])->name('clients');
+Route::get('/clients', [\App\Http\Controllers\ClientController::class, 'show_all']
+)->middleware(['auth'])->name('clients');
 
 require __DIR__.'/auth.php';
