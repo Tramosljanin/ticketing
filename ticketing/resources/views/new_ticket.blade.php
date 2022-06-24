@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semi-bold text-xl text-gray-800 leading-tight">
             {{ __('Create new ticket') }}
         </h2>
     </x-slot>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-sm mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <main>
@@ -13,9 +13,11 @@
                         <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
                         <form action="{{ route('new_ticket') }}" method="post">
+                            @csrf
+
                             <div>
-                                <x-label for="ticket" :value="__('Ticket')"/>
-                                <x-input id="ticket" class="block mt-1 w-full" type="text" name="ticket" required autofocus/>
+                                <x-label for="title" :value="__('Ticket')"/>
+                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" required autofocus/>
                             </div>
 
                             <div>
@@ -51,7 +53,6 @@
                                         <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
                                 </select>
-
                             </div>
 
                             <!-- Technician -->
@@ -63,7 +64,6 @@
                                         <option value="{{ $technician->id }}">{{ $technician->name }}</option>
                                     @endforeach
                                 </select>
-
                             </div>
 
                             <br>
@@ -72,13 +72,8 @@
                                     {{ __('Create') }}
                                 </x-button>
                             </div>
-
-
                         </form>
                     </main>
-
-
-
                 </div>
             </div>
         </div>

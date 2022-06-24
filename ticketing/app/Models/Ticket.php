@@ -18,6 +18,7 @@ class Ticket extends Model
         'closed_at'
     ];
 
+
     public function status()
     {
         return $this->belongsTo(Status::class);

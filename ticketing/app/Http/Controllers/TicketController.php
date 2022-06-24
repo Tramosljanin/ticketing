@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -23,9 +24,9 @@ class TicketController extends Controller
         return view('new_ticket', compact('technicians', 'statuses'));
     }
 
-    public function show_current()
+    public function show_current(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $tickets = Ticket::where('status_id', 1, 2)->get() ;
+        $tickets = Ticket::query()->where('status_id',2)->get() ;
 
         return view('dashboard', compact('tickets'));
     }
@@ -53,37 +54,30 @@ class TicketController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:150'],
-            'description' => ['required', 'text', 'max:500'],
-            'client_name' => ['required', 'string', 'max:255'],
-            'email' => ['optional', 'string', 'email', 'max:255', 'unique:clients'],
-            'phone' => ['optional', 'string', 'max:50', "/^[0-9]*$/", 'unique:clients'],
-            'status' => ['required'],
-            'technician' => ['required'],
+        $ticket_attributes = request()->validate([
+            'title' => ['required', 'string', 'max:150'],
+            'description' => ['required', 'max:500'],
+            'status_id' => 'required',
         ]);
 
-        $ticket = Ticket::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'status_id' => $request->status_id,
-            'user_id' => $request->user_id,
-            'client_id' => $request->client_id,
-            'closed_at' => $request->closed_at,
+        $client_attributes = request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['string', 'email', 'max:255'],
+            'phone' => ['string', 'max:50'],
         ]);
 
-        $client = Client::create([
-            'name' => $request->client_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-        ]);
+        $client_attributes['user_id'] = auth()->id();
+        $ticket_attributes['user_id'] = auth()->id();
 
-        event(new Created($client));
-        event(new Created($ticket));
+        $new_client = Client::query()->create($client_attributes);
+        $ticket_attributes['client_id'] = $new_client->id;
+        $ticket_attributes['name'] = $ticket_attributes['title'];
+
+        Ticket::query()->create($ticket_attributes);
 
         return redirect(RouteServiceProvider::HOME);
     }
