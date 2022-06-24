@@ -14,8 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $technicians = User::where('user_type_id', 2)->get() ;
+
+        return view('new_ticket', compact('technicians'));
     }
+
 
     /**
      * Show the form for creating a new resource.

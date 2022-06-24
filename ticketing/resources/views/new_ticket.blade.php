@@ -8,33 +8,77 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div>
-                        Ticket:
-                        <input type="text" name="ticket" value="<?php echo 'hello' ;?>">
-                        <br>
+                    <main>
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-                        Description:
-                        <textarea name="description" rows="5" cols="40"><?php echo 'hello';?></textarea>
-                        <br>
+                        <form action="{{ route('new_ticket') }}" method="post">
+                            <div>
+                                <x-label for="ticket" :value="__('Ticket')"/>
+                                <x-input id="ticket" class="block mt-1 w-full" type="text" name="ticket" required autofocus/>
+                            </div>
 
-                        Client:
-                        <input type="text" name="name" value="<?php echo  'hello';?>">
-                        <br>
+                            <div>
+                                <x-label for="description" :value="__('Description')"/>
+                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" required autofocus/>
+                            </div>
 
-                        E-mail:
-                        <input type="text" name="email" value="<?php echo 'hello' ;?>">
-                        <br>
+                            <div>
+                                <x-label for="name" :value="__('Client')"/>
 
-                        Phone:
-                        <input type="text" name="phone" value="<?php echo 'hello';?>">
-                        <br>
+                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" required
+                                         autofocus/>
+                            </div>
 
-                        Status:
+                            <div class="mt-4">
+                                <x-label for="email" :value="__('Email')"/>
 
-                        <br>
+                                <x-input id="email" class="block mt-1 w-full" type="email" name="email"/>
+                            </div>
 
-                        Technician:
-                    </div>
+                            <div>
+                                <x-label for="phone" :value="__('Phone')"/>
+
+                                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" required
+                                         autofocus/>
+                            </div>
+
+                            <div class="mt-4">
+                                <x-label for="status_id" :value="__('Status')"/>
+
+                                <select name="status_id" id="status_id" style="border-color: lightgrey">
+                                    @foreach($statuses as $status)
+                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+                            <!-- Technician -->
+                            <div class="mt-4">
+                                <x-label for="user_id" :value="__('Technician')"/>
+
+                                <select name="user_id" id="user_id" style="display: block; hover:bg-gray-100; focus:outline-none; focus:bg-gray-100 transition duration-150 ease-in-out">
+                                    @foreach($technicians as $technician)
+                                        <option value="{{ $technician->id }}">{{ $technician->name }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+                            <br>
+                            <div>
+                                <x-button type="submit" class="ml-4" style="background-color: seagreen">
+                                    {{ __('Create') }}
+                                </x-button>
+                            </div>
+
+
+                        </form>
+                    </main>
+
+
+
                 </div>
             </div>
         </div>

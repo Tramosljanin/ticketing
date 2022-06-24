@@ -32,6 +32,9 @@ class ClientController extends Controller
     public function create()
     {
         //
+        $clients = Client::all();
+
+        return view('new_ticket', compact('clients'));
 
     }
 

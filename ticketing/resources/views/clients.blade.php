@@ -11,10 +11,21 @@
                     <div>
                         @foreach($clients as $client)
                             <ul>
-                                <li>
+                                <li style="margin-bottom: 15px; margin-top: 15px">
                                     {{ $client->name }}
+                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: seagreen; margin-bottom: 5px">
+                                        {{ __('Edit') }}
+                                    </x-button>
+
+                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
+                                        {{ __('View') }}
+                                    </x-button>
+
+
+                                    <!--
                                     <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">Edit</button>
                                     <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">View</button>
+                                    -->
                                 </li>
                                 <hr>
                             </ul>

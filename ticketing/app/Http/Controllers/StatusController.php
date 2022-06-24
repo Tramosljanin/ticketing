@@ -14,7 +14,9 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        $statuses = Status::all();
+
+        return view('new_ticket', compact('statuses'));
     }
 
     /**
