@@ -38,7 +38,13 @@ Route::post('/new_ticket', [TicketController::class, 'store']);
 Route::get('/all_tickets/{ticket}', [TicketController::class, 'show']
 )->middleware(['auth'])->name('ticket');
 
-Route::get('/all_clients/{client}', [ClientController::class, 'show']
+Route::get('/call_lients/{client}', [ClientController::class, 'show']
 )->middleware(['auth'])->name('client');
+
+Route::get('/all_tickets/{edit_ticket}', [TicketController::class, 'update']
+)->middleware(['auth'])->name('edit_ticket');
+
+Route::get('/all_clients/{edit_client}', [TicketController::class, 'update']
+)->middleware(['auth'])->name('edit_client');
 
 require __DIR__.'/auth.php';
