@@ -26,16 +26,20 @@ class TicketController extends Controller
 
     public function show_current(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $tickets = Ticket::query()->where('status_id',2)->get() ;
+        $tickets = Ticket::query()->where('status_id',2)->get();
 
-        return view('dashboard', compact('tickets'));
+        $id = Ticket::all();
+
+        return view('dashboard', compact('tickets', 'id'));
     }
 
     public function show_all()
     {
         $tickets = Ticket::all();
 
-        return view('all_tickets', compact('tickets'));
+        $id = Ticket::all();
+
+        return view('all_tickets', compact('tickets', 'id'));
     }
 
     /**
@@ -91,6 +95,9 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         //
+        $tickets = Ticket::query()->where('id', '1')->get();
+        $clients = Client::query()->where('id', '1')->get();
+        return view('ticket', compact('tickets', 'clients'));
     }
 
     /**

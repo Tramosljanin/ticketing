@@ -35,4 +35,7 @@ Route::get('/clients', [\App\Http\Controllers\ClientController::class, 'show_all
 
 Route::post('/new_ticket', [TicketController::class, 'store']);
 
+Route::get('/all_tickets/{ticket}', [TicketController::class, 'show']
+)->middleware(['auth'])->name('ticket');
+
 require __DIR__.'/auth.php';
