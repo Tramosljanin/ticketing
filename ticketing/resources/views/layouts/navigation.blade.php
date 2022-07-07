@@ -24,7 +24,7 @@
                         {{ __('New ticket') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('clients')" :active="request()->routeIs('clients')">
+                    <x-nav-link :href="route('all_clients')" :active="request()->routeIs('all_clients')">
                         {{ __('Clients') }}
                     </x-nav-link>
                 </div>

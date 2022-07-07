@@ -18,7 +18,9 @@
                                     </x-button>
 
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
-                                        {{ __('View') }}
+                                        <a href="/all_clients/{{ $client -> $id }}">
+                                            {{ __('View') }}
+                                        </a>
                                     </x-button>
 
 

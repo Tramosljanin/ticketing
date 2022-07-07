@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -21,7 +22,9 @@ class ClientController extends Controller
     {
         $clients = Client::all();
 
-        return view('clients', compact('clients'));
+        $id = Client::all();
+
+        return view('clients', compact('clients', 'id'));
     }
 
     /**
@@ -58,6 +61,9 @@ class ClientController extends Controller
     public function show(Client $client)
     {
         //
+        $clients = Client::query()->where('id', '1')->get();
+        $tickets = Ticket::query()->where('client_id', '1')->get();
+        return view('ticket', compact('clients', 'tickets'));
     }
 
     /**

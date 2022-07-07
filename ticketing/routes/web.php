@@ -30,12 +30,15 @@ Route::get('/all_tickets', [\App\Http\Controllers\TicketController::class, 'show
 Route::get('/new_ticket', [TicketController::class, 'index']
 )->middleware(['auth'])->name('new_ticket');
 
-Route::get('/clients', [\App\Http\Controllers\ClientController::class, 'show_all']
-)->middleware(['auth'])->name('clients');
+Route::get('/all_clients', [\App\Http\Controllers\ClientController::class, 'show_all']
+)->middleware(['auth'])->name('all_clients');
 
 Route::post('/new_ticket', [TicketController::class, 'store']);
 
 Route::get('/all_tickets/{ticket}', [TicketController::class, 'show']
 )->middleware(['auth'])->name('ticket');
+
+Route::get('/all_clients/{client}', [ClientController::class, 'show']
+)->middleware(['auth'])->name('client');
 
 require __DIR__.'/auth.php';
