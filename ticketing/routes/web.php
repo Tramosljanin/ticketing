@@ -35,19 +35,16 @@ Route::get('/all_clients', [\App\Http\Controllers\ClientController::class, 'show
 
 Route::post('/new_ticket', [TicketController::class, 'store']);
 
-Route::get('/all_tickets/{ticket}', [TicketController::class, 'show']
+Route::get('/tickets/{ticket}', [TicketController::class, 'show']
 )->middleware(['auth'])->name('ticket');
 
-Route::get('/dashboard/{ticket}', [TicketController::class, 'show']
-)->middleware(['auth'])->name('ticket');
-
-Route::get('/all_clients/{client}', [ClientController::class, 'show']
+Route::get('/clients/{client}', [ClientController::class, 'show']
 )->middleware(['auth'])->name('client');
 
-Route::get('/all_tickets/{edit_ticket}', [TicketController::class, 'update']
+Route::get('/edit_ticket', [TicketController::class, 'edit']
 )->middleware(['auth'])->name('edit_ticket');
 
-Route::get('/all_clients/{edit_client}', [TicketController::class, 'update']
+Route::get('/edit_client/{client}', [TicketController::class, 'edit']
 )->middleware(['auth'])->name('edit_client');
 
 require __DIR__.'/auth.php';

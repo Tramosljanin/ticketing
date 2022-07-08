@@ -26,6 +26,11 @@
                             {{ $ticket->status->name }}
                         </div>
 
+                        <div>
+                            Assigned to:
+                            {{ $ticket->user->name }}
+                        </div>
+
                         <br>
                         CLIENT
                         <br>
@@ -41,11 +46,6 @@
                                 Phone number:
                                 {{ $ticket->client->phone }}
                                 <br>
-                            </div>
-                        <br>
-                            <div>
-                                Assigned to:
-                                {{ $ticket->user->name }}
                             </div>
 
                         <br>

@@ -9,29 +9,15 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div>
-                        @foreach($clients as $client)
-                            <ul>
-                                <li style="margin-bottom: 15px; margin-top: 15px">
-                                    {{ $client->name }}
-                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: seagreen; margin-bottom: 5px">
-                                        {{ __('Edit') }}
-                                    </x-button>
-
-                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
-                                        <a href="/all_clients/{{ $client -> $id }}">
-                                            {{ __('View') }}
-                                        </a>
-                                    </x-button>
 
 
-                                    <!--
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">Edit</button>
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">View</button>
-                                    -->
-                                </li>
-                                <hr>
-                            </ul>
-                        @endforeach
+
+
+
+                        <x-button class="ml-4">
+                            {{ __('Save') }}
+                        </x-button>
+
                     </div>
                 </div>
             </div>
