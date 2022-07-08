@@ -92,18 +92,12 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(Ticket $ticket)
+    public function show(Ticket $ticket): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        //
-        $tickets = Ticket::query()->where('id', '1')->get();
+        $ticket->load(['status', 'client', 'user']);
+        //dd($ticket->toArray());
 
-        $clients = Client::query()->where('id', '1')->get();
-
-        $users = User::query()->where('id', '1')->get();
-
-        $statuses= Status::query()->where('id', '1')->get();
-
-        return view('ticket', compact('tickets', 'clients', 'users', 'statuses'));
+        return view('ticket', compact( 'ticket'));
     }
 
     /**
