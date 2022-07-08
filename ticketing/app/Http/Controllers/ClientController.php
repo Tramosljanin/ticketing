@@ -56,14 +56,14 @@ class ClientController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Client $client)
     {
         //
         $clients = Client::query()->where('id', '1')->get();
-        $tickets = Ticket::query()->where('client_id', '1')->get();
-        return view('ticket', compact('clients', 'tickets'));
+        $tickets = Ticket::query()->where('id', '1')->get();
+        return view('client', compact('clients', 'tickets'));
     }
 
     /**
@@ -88,6 +88,7 @@ class ClientController extends Controller
     {
         //
     }
+
 
     /**
      * Remove the specified resource from storage.

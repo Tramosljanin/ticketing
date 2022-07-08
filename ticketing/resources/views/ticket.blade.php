@@ -23,20 +23,57 @@
                                 Description:
                                 {{ $ticket->description }}
                             </div>
+                        @endforeach
 
+                        @foreach($statuses as $status)
                             <div>
-                                Client:
-                                {{ $ticket->client_id }}
-                            </div>
-
-                            <div>
-                                Technician:
-                                {{ $ticket->user_id }}
+                                Status:
+                                {{ $status->name }}
                             </div>
                         @endforeach
 
                         <br>
+                        CLIENT
+                        <br>
+                        @foreach($clients as $client)
+                            <div>
+                                Name:
+                                {{ $client->name }}
+                                <br>
 
+                                E-mail:
+                                {{ $client->email }}
+                                <br>
+
+                                Phone number:
+                                {{ $client->phone }}
+                                <br>
+                            </div>
+                        @endforeach
+
+                        <br>
+                        @foreach($users as $user)
+                                <div>
+                                    Assigned to:
+                                    {{ $user->name }}
+                                </div>
+                        @endforeach
+
+                        <br>
+                        @foreach($tickets as $ticket)
+                            <div>
+                                Created:
+                                {{ $ticket->created_at }}
+                            </div>
+
+
+                            <div>
+                                Closed:
+                                {{ $ticket->closed_at }}
+                            </div>
+                        @endforeach
+
+                        <br>
                         <div>
                             <x-button type="button" class="ml-4" style="display: block; background-color: cornflowerblue; margin-bottom: 5px">
                                 <a href="/all_tickets">

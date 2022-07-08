@@ -59,7 +59,7 @@
                             <div class="mt-4">
                                 <x-label for="user_id" :value="__('Technician')"/>
 
-                                <select name="user_id" id="user_id" style="display: block; hover:bg-gray-100; focus:outline-none; focus:bg-gray-100 transition duration-150 ease-in-out">
+                                <select name="user_id" id="user_id" style="border-color: lightgrey">
                                     @foreach($technicians as $technician)
                                         <option value="{{ $technician->id }}">{{ $technician->name }}</option>
                                     @endforeach

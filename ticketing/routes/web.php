@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [\App\Http\Controllers\TicketController::class, 'show_current']
+Route::get('/dashboard', [\App\Http\Controllers\TicketController::class, 'show_active']
 )->middleware(['auth'])->name('dashboard');
 
 Route::get('/all_tickets', [\App\Http\Controllers\TicketController::class, 'show_all']
@@ -38,7 +38,7 @@ Route::post('/new_ticket', [TicketController::class, 'store']);
 Route::get('/all_tickets/{ticket}', [TicketController::class, 'show']
 )->middleware(['auth'])->name('ticket');
 
-Route::get('/call_lients/{client}', [ClientController::class, 'show']
+Route::get('/all_clients/{client}', [ClientController::class, 'show']
 )->middleware(['auth'])->name('client');
 
 Route::get('/all_tickets/{edit_ticket}', [TicketController::class, 'update']

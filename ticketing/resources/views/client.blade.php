@@ -28,10 +28,13 @@
                                 Phone number:
                                 {{ $client->phone }}
                             </div>
+                        @endforeach
 
+                        <br>
+                        @foreach($tickets as $ticket)
                             <div>
                                 Tickets:
-                                {{ $client->ticket_id }}
+                                {{ $ticket->name }}
                             </div>
                         @endforeach
 

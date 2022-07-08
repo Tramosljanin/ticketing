@@ -24,7 +24,7 @@ class TicketController extends Controller
         return view('new_ticket', compact('technicians', 'statuses'));
     }
 
-    public function show_current(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function show_active(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $tickets = Ticket::query()->where('status_id',2)->get();
 
@@ -90,14 +90,20 @@ class TicketController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Ticket $ticket)
     {
         //
         $tickets = Ticket::query()->where('id', '1')->get();
+
         $clients = Client::query()->where('id', '1')->get();
-        return view('ticket', compact('tickets', 'clients'));
+
+        $users = User::query()->where('id', '1')->get();
+
+        $statuses= Status::query()->where('id', '1')->get();
+
+        return view('ticket', compact('tickets', 'clients', 'users', 'statuses'));
     }
 
     /**
@@ -112,7 +118,8 @@ class TicketController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified
+     * resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Ticket  $ticket
