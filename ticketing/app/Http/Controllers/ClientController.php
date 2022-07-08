@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Ticket;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -55,21 +58,21 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Client $client
+     * @return Application|Factory|View
      */
-    public function show(Client $client)
+    public function show(Client $client): View|Factory|Application
     {
-        //
-        $clients = Client::query()->where('id', '1')->get();
-        $tickets = Ticket::query()->where('id', '1')->get();
-        return view('client', compact('clients', 'tickets'));
+        $client->load('ticket');
+
+        //dd($client->toArray());
+        return view('client', compact('client'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Client  $client
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
     public function edit(Client $client)
@@ -81,7 +84,7 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Client  $client
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Client $client)
@@ -93,7 +96,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Client  $client
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
     public function destroy(Client $client)

@@ -38,6 +38,9 @@ Route::post('/new_ticket', [TicketController::class, 'store']);
 Route::get('/all_tickets/{ticket}', [TicketController::class, 'show']
 )->middleware(['auth'])->name('ticket');
 
+Route::get('/dashboard/{ticket}', [TicketController::class, 'show']
+)->middleware(['auth'])->name('ticket');
+
 Route::get('/all_clients/{client}', [ClientController::class, 'show']
 )->middleware(['auth'])->name('client');
 
