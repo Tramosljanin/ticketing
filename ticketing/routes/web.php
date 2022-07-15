@@ -41,7 +41,7 @@ Route::get('/clients/{client}', [ClientController::class, 'show']
 Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit']
 )->middleware(['auth'])->name('edit_ticket');
 
-Route::patch('/tickets/{tickets}', [TicketController::class, 'update']);
+Route::patch('/tickets/{ticket}', [TicketController::class, 'update']);
 
 Route::delete('/tickets/{ticket}/edit', [TicketController::class, 'destroy']);
 

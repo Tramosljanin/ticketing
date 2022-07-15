@@ -17,8 +17,8 @@
                             @method('PATCH')
 
                             <div>
-                                <x-label for="title" :value="__('Ticket')"/>
-                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ $ticket -> name }}" required autofocus/>
+                                <x-label for="name" :value="__('Ticket')"/>
+                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $ticket -> name }}" required autofocus/>
                             </div>
 
                             <br>
@@ -49,12 +49,6 @@
                             <br>
 
                             <!--Status-->
-                            <!--
-                            <div>
-                                <x-label for="description" :value="__('Status')"/>
-                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> status -> name }}" required autofocus/>
-                            </div>
-                            -->
                             <div class="mt-4">
                                 <x-label for="status_id" :value="__('Status')"/>
 
@@ -67,18 +61,13 @@
 
                             <br>
 
-                            <!--Assigned to/user
-                            <div>
-                                <x-label for="description" :value="__('Assigned to')"/>
-                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> user -> name }}" required autofocus/>
-                            </div>
-                            -->
+                            <!--Assigned to/user-->
                             <div class="mt-4">
                                 <x-label for="user_id" :value="__('Assigned to')"/>
 
                                 <select name="user_id" id="user_id" style="border-color: lightgrey">
-                                    @foreach($technicians as $technician)
-                                        <option value="{{ $technician->id }}">{{ $technician->name }}</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

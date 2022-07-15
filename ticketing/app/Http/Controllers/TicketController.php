@@ -113,32 +113,30 @@ class TicketController extends Controller
     public function edit(Ticket $ticket): View|Factory|Application
     {
         $ticket->load(['status', 'client', 'user']);
-        $technicians = User::where('user_type_id', 2)->get() ;
+        $users = User::where('user_type_id', 2)->get() ;
         $statuses = Status::all();
 
-        return view('edit_ticket', compact('ticket', 'technicians', 'statuses'));
+        return view('edit_ticket', compact('ticket', 'users', 'statuses'));
     }
 
     /**
      * Update the specified
      * resource in storage.
      *
-     * @param Request $request
      * @param Ticket $ticket
      * @return Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Ticket $ticket, Request $request)
     {
-        //
-        $ticket_attributes = request()->validate([
-            'title' => ['required', 'string', 'max:150'],
+        $ticket_attributes = $request->validate([
+            'name' => ['required', 'string', 'max:150'],
             'description' => ['required', 'max:500'],
             'status_id' => 'required',
+            'user_id' => 'required',
         ]);
 
-        $ticket_attributes['user_id'] = auth()->id();
-
         $ticket->update($ticket_attributes);
+
 
         return back();
 
