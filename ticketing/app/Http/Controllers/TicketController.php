@@ -7,14 +7,18 @@ use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -24,7 +28,7 @@ class TicketController extends Controller
         return view('new_ticket', compact('technicians', 'statuses'));
     }
 
-    public function show_active(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function show_active(): Factory|View|Application
     {
         $tickets = Ticket::query()->where('status_id',2)->get();
 
@@ -45,9 +49,9 @@ class TicketController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         $tickets = Ticket::all();
 
@@ -57,10 +61,10 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param Request $request
+     * @return Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+    public function store(Request $request): Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
         $ticket_attributes = request()->validate([
             'title' => ['required', 'string', 'max:150'],
@@ -89,10 +93,10 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Ticket $ticket
+     * @return Application|Factory|View
      */
-    public function show(Ticket $ticket): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function show(Ticket $ticket): View|Factory|Application
     {
         $ticket->load(['status', 'client', 'user']);
         //dd($ticket->toArray());
@@ -103,35 +107,54 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
+     * @param Ticket $ticket
+     * @return Application|Factory|View
      */
-    public function edit(Ticket $ticket)
+    public function edit(Ticket $ticket): View|Factory|Application
     {
-        //
+        $ticket->load(['status', 'client', 'user']);
+        $technicians = User::where('user_type_id', 2)->get() ;
+        $statuses = Status::all();
+
+        return view('edit_ticket', compact('ticket', 'technicians', 'statuses'));
     }
 
     /**
      * Update the specified
      * resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Ticket $ticket
+     * @return Response
      */
     public function update(Request $request, Ticket $ticket)
     {
         //
+        $ticket_attributes = request()->validate([
+            'title' => ['required', 'string', 'max:150'],
+            'description' => ['required', 'max:500'],
+            'status_id' => 'required',
+        ]);
+
+        $ticket_attributes['user_id'] = auth()->id();
+
+        $ticket->update($ticket_attributes);
+
+        return back();
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
+     * @param Ticket $ticket
+     * @return Response
      */
     public function destroy(Ticket $ticket)
     {
         //
+        $ticket->delete();
+
+        return back()->with('success', 'Ticket Deleted!');
     }
 }

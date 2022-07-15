@@ -14,11 +14,13 @@
                                 <li style="margin-bottom: 15px; margin-top: 15px">
                                     {{ $client->name }}
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: seagreen; margin-bottom: 5px">
-                                        {{ __('Edit') }}
+                                        <a href="/clients/{{ $client -> id }}/edit">
+                                            {{ __('Edit') }}
+                                        </a>
                                     </x-button>
 
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
-                                        <a href="/all_clients/{{ $client -> $id }}">
+                                        <a href="/clients/{{ $client -> id }}">
                                             {{ __('View') }}
                                         </a>
                                     </x-button>

@@ -20,11 +20,13 @@
                                     </x-button>
 
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: seagreen; margin-bottom: 5px">
-                                        {{ __('Edit') }}
+                                        <a href="/tickets/{{ $ticket -> id }}/edit">
+                                            {{ __('Edit') }}
+                                        </a>
                                     </x-button>
 
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
-                                        <a href="">
+                                        <a href="/tickets/{{ $ticket->id }}">
                                         {{ __('View') }}
                                         </a>
                                     </x-button>

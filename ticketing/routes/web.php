@@ -3,9 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\StatusController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,10 +38,14 @@ Route::get('/tickets/{ticket}', [TicketController::class, 'show']
 Route::get('/clients/{client}', [ClientController::class, 'show']
 )->middleware(['auth'])->name('client');
 
-Route::get('/edit_ticket', [TicketController::class, 'edit']
+Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit']
 )->middleware(['auth'])->name('edit_ticket');
 
-Route::get('/edit_client/{client}', [TicketController::class, 'edit']
+Route::patch('/tickets/{tickets}', [TicketController::class, 'update']);
+
+Route::delete('/tickets/{ticket}/edit', [TicketController::class, 'destroy']);
+
+Route::get('/clients/{client}/edit', [TicketController::class, 'edit']
 )->middleware(['auth'])->name('edit_client');
 
 require __DIR__.'/auth.php';

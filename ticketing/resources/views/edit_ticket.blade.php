@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-gray-800 leading-tight">
-            {{ __('Edit ticket...') }}
+            Edit ticket: {{ $ticket->name }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -12,52 +12,69 @@
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-                        <form action="{{ route('edit_ticket') }}" method="post">
+                        <form action="{{ route('ticket', $ticket) }}" method="post">
                             @csrf
+                            @method('PATCH')
 
                             <div>
                                 <x-label for="title" :value="__('Ticket')"/>
-                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" required autofocus/>
+                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ $ticket -> name }}" required autofocus/>
                             </div>
+
+                            <br>
 
                             <div>
                                 <x-label for="description" :value="__('Description')"/>
-                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" required autofocus/>
+                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> description }}" required autofocus/>
                             </div>
 
+                            <br>
+
+                            CLIENT
+                            <br>
                             <div>
-                                <x-label for="name" :value="__('Client')"/>
+                                Name:
+                                {{ $ticket->client->name }}
+                                <br>
 
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" required
-                                         autofocus/>
+                                E-mail:
+                                {{ $ticket->client->email }}
+                                <br>
+
+                                Phone number:
+                                {{ $ticket->client->phone }}
+                                <br>
                             </div>
 
-                            <div class="mt-4">
-                                <x-label for="email" :value="__('Email')"/>
+                            <br>
 
-                                <x-input id="email" class="block mt-1 w-full" type="email" name="email"/>
-                            </div>
-
+                            <!--Status-->
+                            <!--
                             <div>
-                                <x-label for="phone" :value="__('Phone')"/>
-
-                                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" required
-                                         autofocus/>
+                                <x-label for="description" :value="__('Status')"/>
+                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> status -> name }}" required autofocus/>
                             </div>
-
+                            -->
                             <div class="mt-4">
                                 <x-label for="status_id" :value="__('Status')"/>
 
-                                <select name="status_id" id="status_id" style="border-color: lightgrey">
+                                <select name="status_id" id="status_id" value="{{ $ticket -> status -> name }}" style="border-color: lightgrey">
                                     @foreach($statuses as $status)
-                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                        <option value="{{ $status->id }}" >{{ $status->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <!-- Technician -->
+                            <br>
+
+                            <!--Assigned to/user
+                            <div>
+                                <x-label for="description" :value="__('Assigned to')"/>
+                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> user -> name }}" required autofocus/>
+                            </div>
+                            -->
                             <div class="mt-4">
-                                <x-label for="user_id" :value="__('Technician')"/>
+                                <x-label for="user_id" :value="__('Assigned to')"/>
 
                                 <select name="user_id" id="user_id" style="border-color: lightgrey">
                                     @foreach($technicians as $technician)
@@ -67,9 +84,10 @@
                             </div>
 
                             <br>
+
                             <div>
                                 <x-button type="submit" class="ml-4" style="background-color: seagreen">
-                                    {{ __('Create') }}
+                                    {{ __('Update') }}
                                 </x-button>
                             </div>
                         </form>
