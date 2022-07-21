@@ -42,9 +42,13 @@
                                         </a>
                                     </x-button>
                                 </li>
+
                                 <hr>
+
                             </ul>
                         @endforeach
+
+                        {{ $tickets->links() }}
                     </div>
                 </div>
             </div>

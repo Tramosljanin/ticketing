@@ -14,7 +14,7 @@
                             <ul>
                                 <li style="margin-bottom: 15px; margin-top: 15px">
                                     {{ $ticket->name }}
-                                    
+
                                     <x-button type="button"  class="ml-4" style="display: block; float: right; background-color: darkred; margin-bottom: 5px">
                                         <a href="/tickets/{{ $ticket -> id }}/delete">
                                             {{ __('Delete') }}
@@ -32,16 +32,14 @@
                                         {{ __('View') }}
                                         </a>
                                     </x-button>
-                                    <!--
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">Delete</button>
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">Edit</button>
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">View</button>
-                                    -->
                                 </li>
 
                                 <hr>
+
                             </ul>
                         @endforeach
+
+                        {{ $tickets->links() }}
                     </div>
                 </div>
             </div>

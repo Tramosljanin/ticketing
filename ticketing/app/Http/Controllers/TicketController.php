@@ -30,20 +30,16 @@ class TicketController extends Controller
 
     public function show_active(): Factory|View|Application
     {
-        $tickets = Ticket::query()->where('status_id',1)->get();
+        $tickets = Ticket::query()->where('status_id',1)->paginate();
 
-        $id = Ticket::all();
-
-        return view('dashboard', compact('tickets', 'id'));
+        return view('dashboard', compact('tickets'));
     }
 
-    public function show_all()
+    public function show_all(): Factory|View|Application
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::query()->paginate();
 
-        $id = Ticket::all();
-
-        return view('all_tickets', compact('tickets', 'id'));
+        return view('all_tickets', compact('tickets'));
     }
 
     /**
