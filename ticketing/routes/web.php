@@ -43,7 +43,7 @@ Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit']
 
 Route::patch('/tickets/{ticket}', [TicketController::class, 'update']);
 
-Route::delete('/tickets/{ticket}/edit', [TicketController::class, 'destroy']);
+Route::delete('/tickets/{ticket}/delete', [TicketController::class, 'destroy']);
 
 
 //CLIENTS

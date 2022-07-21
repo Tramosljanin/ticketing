@@ -30,7 +30,7 @@ class TicketController extends Controller
 
     public function show_active(): Factory|View|Application
     {
-        $tickets = Ticket::query()->where('status_id',2)->get();
+        $tickets = Ticket::query()->where('status_id',1)->get();
 
         $id = Ticket::all();
 

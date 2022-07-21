@@ -14,9 +14,11 @@
                             <ul>
                                 <li style="margin-bottom: 15px; margin-top: 15px">
                                     {{ $ticket->name }}
-
+                                    
                                     <x-button type="button"  class="ml-4" style="display: block; float: right; background-color: darkred; margin-bottom: 5px">
-                                        {{ __('Delete') }}
+                                        <a href="/tickets/{{ $ticket -> id }}/delete">
+                                            {{ __('Delete') }}
+                                        </a>
                                     </x-button>
 
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: seagreen; margin-bottom: 5px">
