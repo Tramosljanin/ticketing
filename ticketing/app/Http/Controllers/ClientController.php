@@ -8,13 +8,14 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -33,7 +34,7 @@ class ClientController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -47,8 +48,8 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -73,23 +74,34 @@ class ClientController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Client $client
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function edit(Client $client)
     {
         //
+
+        return view('edit_client', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Client $client, Request $request)
     {
         //
+        $client_attributes = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['string', 'email', 'max:255'],
+            'phone' => ['string', 'max:50'],
+        ]);
+
+        $client->update($client_attributes);
+
+        return back();
     }
 
 
@@ -97,7 +109,7 @@ class ClientController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Client $client)
     {
