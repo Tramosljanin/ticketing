@@ -47,6 +47,7 @@
                         @endforeach
 
                         {{ $tickets->links() }}
+
                     </div>
                 </div>
             </div>

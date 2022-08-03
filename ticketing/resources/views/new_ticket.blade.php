@@ -60,9 +60,9 @@
                                 <x-label for="status_id" :value="__('Status')"/>
                                 <select id="status_id" name="status_id"
                                         class="mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        @foreach($statuses as $status)
-                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
-                                        @endforeach
+                                    @foreach($statuses as $status)
+                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -72,9 +72,9 @@
 
                                 <select id="user_id" name="user_id"
                                         class="mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        @foreach($technicians as $technician)
-                                            <option value="{{ $technician->id }}">{{ $technician->name }}</option>
-                                        @endforeach
+                                    @foreach($technicians as $technician)
+                                        <option value="{{ $technician->id }}">{{ $technician->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -90,6 +90,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </x-app-layout>

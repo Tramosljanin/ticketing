@@ -15,24 +15,20 @@
                                     {{ $client->name }}
 
                                     @if (auth()->user()->can('agent'))
-                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: mediumseagreen; margin-bottom: 5px">
-                                        <a href="/clients/{{ $client -> id }}/edit">
-                                            {{ __('Edit') }}
-                                        </a>
-                                    </x-button>
+                                        <x-button type="button" class="ml-4"
+                                                  style="display: block; float: right; background-color: mediumseagreen; margin-bottom: 5px">
+                                            <a href="/clients/{{ $client -> id }}/edit">
+                                                {{ __('Edit') }}
+                                            </a>
+                                        </x-button>
                                     @endif
 
-                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
+                                    <x-button type="button" class="ml-4"
+                                              style="display: block; float: right; background-color: cornflowerblue; margin-bottom: 5px">
                                         <a href="/clients/{{ $client -> id }}">
                                             {{ __('View') }}
                                         </a>
                                     </x-button>
-
-
-                                    <!--
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">Edit</button>
-                                    <button type="button" style="display: block; float: right; padding-right: 5px; padding-left: 5px; text-decoration: underline">View</button>
-                                    -->
                                 </li>
                                 <hr>
                             </ul>

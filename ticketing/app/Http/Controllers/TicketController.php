@@ -39,8 +39,6 @@ class TicketController extends Controller
             $tickets = Ticket::query()->where('user_id', auth()->id())->paginate();
         }
 
-        //$tickets = Ticket::query()->where('status_id', '1')->paginate();
-
         return view('dashboard', compact('tickets'));
     }
 
@@ -148,7 +146,6 @@ class TicketController extends Controller
 
         $ticket->update($ticket_attributes);
 
-
         return back();
 
     }
@@ -161,7 +158,6 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
         $ticket->delete();
 
         return back()->with('success', 'Ticket Deleted!');
