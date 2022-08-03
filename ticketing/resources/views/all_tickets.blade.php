@@ -15,22 +15,13 @@
                                 <li style="margin-bottom: 15px; margin-top: 15px">
                                     {{ $ticket->name }}
 
+                                    @if (auth()->user()->can('agent'))
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: indianred; margin-bottom: 5px">
                                         <a href="/tickets/{{ $ticket -> id }}/edit">
                                             {{ __('Delete') }}
                                         </a>
                                     </x-button>
-                                    <!--
-                                    <form method="post" action="/tickets/{{ $ticket -> id }}/delete" class="ml-4" style="display: block; float: right; background-color: transparent">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <x-button type="button" class="ml-4" style="background-color: indianred">
-                                            {{ __('Delete') }}
-                                        </x-button>
-                                    </form>
-                                    -->
-
+                                    @endif
 
                                     <x-button type="button" class="ml-4" style="display: block; float: right; background-color: mediumseagreen; margin-bottom: 5px">
                                         <a href="/tickets/{{ $ticket -> id }}/edit">

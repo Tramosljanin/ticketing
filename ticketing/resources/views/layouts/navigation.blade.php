@@ -20,9 +20,11 @@
                         {{ __('All tickets') }}
                     </x-nav-link>
 
+                    @if (auth()->user()->can('agent'))
                     <x-nav-link :href="route('new_ticket')" :active="request()->routeIs('new_ticket')">
                         {{ __('New ticket') }}
                     </x-nav-link>
+                    @endif
 
                     <x-nav-link :href="route('all_clients')" :active="request()->routeIs('all_clients')">
                         {{ __('Clients') }}
