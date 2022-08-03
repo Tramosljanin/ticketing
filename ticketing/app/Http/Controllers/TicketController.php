@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TicketController extends Controller
 {
@@ -22,6 +23,8 @@ class TicketController extends Controller
      */
     public function index()
     {
+        $this->authorize('agent');
+
         $technicians = User::where('user_type_id', 2)->get() ;
         $statuses = Status::all();
 
@@ -30,7 +33,7 @@ class TicketController extends Controller
 
     public function show_active(): Factory|View|Application
     {
-        $tickets = Ticket::query()->where('status_id',1)->paginate();
+        $tickets = Ticket::query()->where('status_id', '1')->paginate();
 
         return view('dashboard', compact('tickets'));
     }
@@ -62,6 +65,8 @@ class TicketController extends Controller
      */
     public function store(Request $request): Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
+        $this->authorize('agent');
+
         $ticket_attributes = request()->validate([
             'title' => ['required', 'string', 'max:150'],
             'description' => ['required', 'max:500'],

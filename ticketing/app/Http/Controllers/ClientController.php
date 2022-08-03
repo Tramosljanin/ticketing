@@ -78,7 +78,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        $this->authorize('agent');
 
         return view('edit_client', compact('client'));
     }
@@ -92,7 +92,8 @@ class ClientController extends Controller
      */
     public function update(Client $client, Request $request)
     {
-        //
+        $this->authorize('agent');
+
         $client_attributes = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['string', 'email', 'max:255'],
