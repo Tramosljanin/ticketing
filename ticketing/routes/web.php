@@ -43,7 +43,9 @@ Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit']
 
 Route::patch('/tickets/{ticket}', [TicketController::class, 'update']);
 
-Route::delete('/tickets/{ticket}/delete', [TicketController::class, 'destroy']);
+
+//Delete Ticket
+Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('delete_ticket');
 
 
 

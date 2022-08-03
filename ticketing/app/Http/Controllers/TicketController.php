@@ -10,8 +10,10 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 
 class TicketController extends Controller
 {
@@ -70,9 +72,9 @@ class TicketController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request): Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+    public function store(Request $request): Application|RedirectResponse|\Illuminate\Routing\Redirector
     {
         $this->authorize('agent');
 
@@ -154,10 +156,14 @@ class TicketController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Ticket $ticket
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Ticket $ticket)
+    public function destroy($id)
+
     {
+        $this->authorize('agent');
+
+        $ticket = Ticket::where('id', $id);
         $ticket->delete();
 
         return back()->with('success', 'Ticket Deleted!');
