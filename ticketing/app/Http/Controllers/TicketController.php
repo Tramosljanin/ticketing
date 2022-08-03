@@ -12,7 +12,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TicketController extends Controller
 {
@@ -33,14 +32,26 @@ class TicketController extends Controller
 
     public function show_active(): Factory|View|Application
     {
-        $tickets = Ticket::query()->where('status_id', '1')->paginate();
+        if(auth()->user()->can('agent')){
+            $tickets = Ticket::query()->where('status_id', '1')->paginate();
+        }
+        elseif(auth()->user()->can('technician')){
+            $tickets = Ticket::query()->where('user_id', auth()->id())->paginate();
+        }
+
+        //$tickets = Ticket::query()->where('status_id', '1')->paginate();
 
         return view('dashboard', compact('tickets'));
     }
 
     public function show_all(): Factory|View|Application
     {
-        $tickets = Ticket::query()->paginate();
+        if(auth()->user()->can('agent')){
+            $tickets = Ticket::query()->paginate();
+        }
+        elseif(auth()->user()->can('technician')){
+            $tickets = Ticket::query()->where('status_id', 3)->paginate();
+        }
 
         return view('all_tickets', compact('tickets'));
     }
@@ -100,7 +111,6 @@ class TicketController extends Controller
     public function show(Ticket $ticket): View|Factory|Application
     {
         $ticket->load(['status', 'client', 'user']);
-        //dd($ticket->toArray());
 
         return view('ticket', compact( 'ticket'));
     }

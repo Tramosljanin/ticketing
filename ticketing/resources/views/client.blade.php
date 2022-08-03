@@ -51,6 +51,16 @@
                                 @endforeach
                             </dd>
                         </div>
+
+                        <br>
+                        <div>
+                            <x-button type="button" class="ml-4"
+                                      style="display: block; background-color: cornflowerblue; margin-bottom: 5px">
+                                <a href="/all_clients">
+                                    {{ __('Back') }}
+                                </a>
+                            </x-button>
+                        </div>
                     </dl>
                 </div>
             </div>

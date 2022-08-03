@@ -29,5 +29,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('agent', function (User $user){
             return $user->user_type_id == '1';
         });
+
+        Gate::define('technician', function (User $user){
+            return $user->user_type_id == '2';
+        });
     }
 }
