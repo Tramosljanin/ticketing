@@ -1,9 +1,11 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
-            </a>
+            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                <p style="font-family: 'Nunito', sans-serif; font-size: 25pt; color: mediumseagreen">
+                    e-Ticketing
+                </p>
+            </div>
         </x-slot>
 
         <!-- Validation Errors -->
@@ -16,12 +18,12 @@
             <div class="mt-4">
                 <x-label for="user_type_id" :value="__('User type')"/>
 
-                <select name="user_type_id" id="user_type_id">
+                <select id="user_type_id" name="user_type_id"
+                        class="mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     @foreach($userTypes as $userType)
                         <option value="{{ $userType->id }}">{{ $userType->name }}</option>
                     @endforeach
                 </select>
-
             </div>
 
             <!-- Name -->
@@ -63,7 +65,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4">
+                <x-button class="ml-4" style="background-color: mediumseagreen">
                     {{ __('Register') }}
                 </x-button>
             </div>

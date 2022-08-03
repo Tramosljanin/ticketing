@@ -1,9 +1,11 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                <p style="font-family: 'Nunito', sans-serif; font-size: 25pt; color: mediumseagreen">
+                    e-Ticketing
+                </p>
+            </div>
         </x-slot>
 
         <!-- Session Status -->
@@ -47,7 +49,7 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3" style="background-color: mediumseagreen">
                     {{ __('Log in') }}
                 </x-button>
             </div>
