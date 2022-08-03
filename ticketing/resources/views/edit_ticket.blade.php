@@ -18,32 +18,14 @@
 
                             <div>
                                 <x-label for="name" :value="__('Ticket')"/>
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $ticket -> name }}" required autofocus/>
+                                <x-input id="name" class="block mt-1" type="text" name="name" value="{{ $ticket -> name }}" required autofocus/>
                             </div>
 
                             <br>
 
                             <div>
                                 <x-label for="description" :value="__('Description')"/>
-                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> description }}" required autofocus/>
-                            </div>
-
-                            <br>
-
-                            CLIENT
-                            <br>
-                            <div>
-                                Name:
-                                {{ $ticket->client->name }}
-                                <br>
-
-                                E-mail:
-                                {{ $ticket->client->email }}
-                                <br>
-
-                                Phone number:
-                                {{ $ticket->client->phone }}
-                                <br>
+                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ $ticket -> description }}" rows="3" required autofocus/>
                             </div>
 
                             <br>
@@ -51,29 +33,27 @@
                             <!--Status-->
                             <div class="mt-4">
                                 <x-label for="status_id" :value="__('Status')"/>
-
-                                <select name="status_id" id="status_id" value="{{ $ticket -> status -> name }}" style="border-color: lightgrey">
+                                <select id="status_id" name="status_id"
+                                        class="mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     @foreach($statuses as $status)
                                         <option value="{{ $status->id }}" >{{ $status->name }}</option>
                                     @endforeach
                                 </select>
-
                             </div>
-
-                            <br>
 
                             <!--Assigned to/user-->
                             <div class="mt-4">
-                                <x-label for="user_id" :value="__('Assigned to')"/>
+                                <x-label for="user_id" :value="__('Assigned to:')"/>
 
-                                <select name="user_id" id="user_id" style="border-color: lightgrey">
+                                <select id="user_id" name="user_id"
+                                        class="mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <br>
+                            <br><br>
 
                             <div>
                                 <x-button type="submit" class="ml-4" style="background-color: mediumseagreen">

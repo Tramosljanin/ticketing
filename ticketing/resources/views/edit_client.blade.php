@@ -18,21 +18,21 @@
 
                             <div>
                                 <x-label for="name" :value="__('Name')"/>
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $client -> name }}" required autofocus/>
+                                <x-input id="name" class="block mt-1" type="text" name="name" value="{{ $client -> name }}" required autofocus/>
                             </div>
 
                             <br>
 
                             <div>
-                                <x-label for="email" :value="__('Email')"/>
-                                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ $client -> email }}" required autofocus/>
+                                <x-label for="email" :value="__('Email address')"/>
+                                <x-input id="email" class="block mt-1" type="email" name="email" value="{{ $client -> email }}" required autofocus/>
                             </div>
 
                             <br>
 
                             <div>
                                 <x-label for="phone" :value="__('Phone number')"/>
-                                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" value="{{ $client -> phone }}" required autofocus/>
+                                <x-input id="phone" class="block mt-1" type="text" name="phone" value="{{ $client -> phone }}" required autofocus/>
                             </div>
 
                             <br>
