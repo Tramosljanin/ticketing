@@ -38,7 +38,7 @@
                             <br>
 
                             <div>
-                                <x-button type="submit" class="ml-4" style="background-color: seagreen">
+                                <x-button type="submit" class="ml-4" style="background-color: mediumseagreen">
                                     {{ __('Update') }}
                                 </x-button>
                             </div>

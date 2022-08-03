@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semi-bold text-xl text-gray-800 leading-tight">
             {{ __('Active tickets') }}
         </h2>
     </x-slot>
@@ -15,13 +15,13 @@
                                 <li style="margin-bottom: 15px; margin-top: 15px">
                                     {{ $ticket->name }}
 
-                                    <x-button type="button"  class="ml-4" style="display: block; float: right; background-color: darkred; margin-bottom: 5px">
+                                    <x-button type="button"  class="ml-4" style="display: block; float: right; background-color: indianred; margin-bottom: 5px">
                                         <a href="/tickets/{{ $ticket -> id }}/delete">
                                             {{ __('Delete') }}
                                         </a>
                                     </x-button>
 
-                                    <x-button type="button" class="ml-4" style="display: block; float: right; background-color: seagreen; margin-bottom: 5px">
+                                    <x-button type="button"  class="ml-4" style="display: block; float: right; background-color: mediumseagreen; margin-bottom: 5px">
                                         <a href="/tickets/{{ $ticket -> id }}/edit">
                                             {{ __('Edit') }}
                                         </a>
