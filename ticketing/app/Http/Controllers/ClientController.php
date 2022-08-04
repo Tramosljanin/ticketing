@@ -66,7 +66,6 @@ class ClientController extends Controller
     {
         $client->load('ticket');
 
-        //dd($client->toArray());
         return view('client', compact('client'));
     }
 
