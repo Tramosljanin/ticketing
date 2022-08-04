@@ -93,6 +93,7 @@ class TicketController extends Controller
         $client_attributes['user_id'] = auth()->id();
         $ticket_attributes['user_id'] = auth()->id();
 
+        
         $new_client = Client::query()->create($client_attributes);
         $ticket_attributes['client_id'] = $new_client->id;
         $ticket_attributes['name'] = $ticket_attributes['title'];
