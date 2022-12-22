@@ -5,3 +5,11 @@ Napraviti ticketing sustav za tehničku podršku gdje korisnici (ovisno o vrsti 
 
 
 Github link: https://github.com/Tramosljanin/ticketing
+
+--> login za primjer postojeceg AGENTA:
+mail: i.laric@gmail.com
+pass: 12345678
+
+--> login za primjer postojeceg TEHNICARA:
+mail: tehnicar2@gmail.com
+pass: tehnicar2
